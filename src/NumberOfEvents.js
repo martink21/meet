@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import { ErrorAlert } from './Alert'; 
+import React, { Component } from "react";
 
-function NumberOfEvents(props) {
-  const [ eventsToShow, setEventsToShow ] = useState(props.eventsToShow);
-  const text = props.text
+class NumberOfEvents extends Component {
+  state = {
+    numberOfEvents: 32,
+  };
 
-  const handleChange = (event) => {
-    if(event.target.value === "") {
-      setEventsToShow(event.target.value);
-      props.updateEventNum("NoNum");
-    } else {
-      setEventsToShow(event.target.value);
-      props.updateEventNum(event.target.value)
-    }
+  handleInputChanged(event) {
+    const value = event.target.value;
+    this.setState({
+      numberOfEvents: value,
+    });
+    this.props.updateNumberOfEvents(event.target.value);
   }
 
+  render() {
     return (
       <div className="numberOfEvents">
-        <ErrorAlert text={text}/>
-        <label htmlFor="number">Events per page: </label>
-          <input 
-          type="number" 
-          id="number" 
-          className="numberInput"
-          value={eventsToShow}
-          placeholder="#" 
-          onChange={handleChange} />
+        <form>
+          <label htmlFor="fname"> Number of Events:</label>
+          <input
+            type="text"
+            className="EventsNumber"
+            value={this.props.numberOfEvents}
+            onChange={(e) => this.handleInputChanged(e)}
+          />
+        </form>
       </div>
-    )
+    );
+  }
 }
-
 export default NumberOfEvents;
