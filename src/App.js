@@ -7,11 +7,14 @@ import { getEvents, extractLocations } from './api';
 import './nprogress.css';
 
 class App extends Component {
-  state = {
-    events: [],
-    locations: [],
-    numberOfEvents: 32,
-    currentLocation: undefined
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: [],
+      locations: [],
+      numberOfEvents: 32,
+      currentLocation: undefined,
+    };
   }
 
   updateNumberOfEvents(eventNumber) {
