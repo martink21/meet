@@ -13,14 +13,14 @@ class App extends Component {
       events: [],
       locations: [],
       numberOfEvents: 32,
-      currentLocation: undefined,
+      currentLocation: "all"
     };
   }
 
   updateNumberOfEvents(eventNumber) {
-    const { locations, numberOfEvents } = this.state;
+    // const { locations, numberOfEvents } = this.state;
     this.setState({ numberOfEvents: eventNumber });
-    this.updateEvents(locations, numberOfEvents);
+    this.updateEvents(this.state.currentLocation, eventNumber)
   }
 
   componentDidMount() {
@@ -57,7 +57,7 @@ class App extends Component {
         <CitySearch 
         locations={this.state.locations} 
         updateEvents={this.updateEvents} 
-        numberOfEvents={this.numberOfEvents} />
+        numberOfEvents={this.state.numberOfEvents} />
 
         <NumberOfEvents 
         updateNumberOfEvents={(e) => this.updateNumberOfEvents(e)} 
