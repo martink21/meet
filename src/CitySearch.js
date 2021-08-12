@@ -22,9 +22,8 @@ class CitySearch extends Component {
           });
         } else {
           return this.setState({
-            query: suggestions,
-            suggestions: [],
-            showSuggestions:false,
+            query: value,
+            suggestions,
             infoText:''
           });
         }
@@ -42,6 +41,7 @@ class CitySearch extends Component {
     render() {
         return (
             <div className="CitySearch">
+                 
                 <input
                     type="text"
                     className="city"
