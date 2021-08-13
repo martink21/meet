@@ -41,13 +41,15 @@ input[type="number"] {
 }
 
 .CitySearch {
+
   display: flex;
   flex-direction: column;
   flex-basis: 300px;
   max-width: 300px;
-  margin: auto;
+  margin: 40px auto 10px;
   position: relative;
 }
+
 
 .suggestions {
   width: 250px;
