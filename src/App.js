@@ -5,6 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import './nprogress.css';
+import { WarningAlert } from './Alert';
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class App extends Component {
       events: [],
       locations: [],
       numberOfEvents: 32,
-      currentLocation: "all"
+      currentLocation: "all",
+      networkStatus: navigator.onLine ? 'Online' : 'Offline'
     };
   }
 
@@ -52,8 +54,13 @@ class App extends Component {
   };
 
   render() {
+    const { networkStatus } = this.state;
+      
     return (
       <div className="App">
+        <WarningAlert
+          text={networkStatus === 'Offline' ? 'App is running offline: data may not be updated' : ''}
+        />
         <CitySearch 
         locations={this.state.locations} 
         updateEvents={this.updateEvents} 
