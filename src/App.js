@@ -8,6 +8,7 @@ import './nprogress.css';
 import { WarningAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import EventGenre from './EventGenre';
 
 class App extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class App extends Component {
 
   render() {
     if (this.state.showWelcomeScreen === undefined) return <div className="App" />
-    const { networkStatus } = this.state;
+    const { networkStatus, events } = this.state;
 
     return (
       <div className="App">
@@ -93,7 +94,8 @@ class App extends Component {
           numberOfEvents={this.state.numberOfEvents} />
 
         <h4>Events in each city</h4>
-
+        <div className="data-vis-wrapper">
+        <EventGenre events={this.state.events}/>
         <ResponsiveContainer height={400} >
         <ScatterChart
             margin={{
@@ -107,6 +109,7 @@ class App extends Component {
           <Scatter data={this.getData()} fill="#8884d8" />
         </ScatterChart>
         </ResponsiveContainer>   
+        </div>
         <EventList
           events={this.state.events} />
 
