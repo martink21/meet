@@ -11,8 +11,8 @@ import NProgress from 'nprogress';
  * The Set will remove all duplicates from the array.
  */
  export const extractLocations = (events) => {
-    var extractLocations = events.map((event) => event.location);
-    var locations = [...new Set(extractLocations)];
+    let extractLocations = events.map((event) => event.location);
+    let locations = [...new Set(extractLocations)];
     return locations;
   };
 
@@ -29,7 +29,7 @@ import NProgress from 'nprogress';
   const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const { access_token } = await fetch(
-      'https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+      `https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/token=${encodeCode}`
     )
       .then((res) => {
         return res.json();
@@ -43,14 +43,14 @@ import NProgress from 'nprogress';
   
   const removeQuery = () => {
     if (window.history.pushState && window.location.pathname) {
-      var newurl =
+      const newurl =
         window.location.protocol +
         "//" +
         window.location.host +
         window.location.pathname;
       window.history.pushState("", "", newurl);
     } else {
-      newurl = window.location.protocol + "//" + window.location.host;
+      const newurl = window.location.protocol + "//" + window.location.host;
       window.history.pushState("", "", newurl);
     }
   };
@@ -73,10 +73,10 @@ import NProgress from 'nprogress';
   
     if (token) {
       removeQuery();
-      const url = 'https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
+      const url = `https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`
       const result = await axios.get(url);
       if (result.data) {
-        var locations = extractLocations(result.data.events);
+        let locations = extractLocations(result.data.events);
         localStorage.setItem("lastEvents", JSON.stringify(result.data));
         localStorage.setItem("locations", JSON.stringify(locations));
       }
