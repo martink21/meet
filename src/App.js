@@ -23,7 +23,7 @@ class App extends Component {
     };
   }
 
-  updateNumberOfEvents(eventNumber) {
+  updateNumberOfEvents = (eventNumber) => {
     const { currentLocation } = this.state;
     this.setState({ numberOfEvents: eventNumber });
     this.updateEvents(currentLocation, eventNumber)
@@ -32,15 +32,16 @@ class App extends Component {
   async componentDidMount() {
     this.mounted = true;
     const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false :
-      true;
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
+          this.setState({ 
+            events: events.slice(0, this.state.numberOfEvents), 
+            locations: extractLocations(events) });
         }
       });
     }
@@ -50,20 +51,17 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateEvents = (location, numberOfEvents) => {
+  updateEvents = (location) => {
     getEvents().then((events) => {
-      const locationEvents =
-        location === "all"
-          ? events
-          : events.filter((event) => event.location === location);
-      if (this.mounted) {
-        this.setState({
-          events: locationEvents.slice(0, numberOfEvents),
-          currentLocation: location,
-        });
-      }
+      const locationEvents = (location === 'all') ?
+        events :
+        events.filter((event) => event.location === location);
+      const { numberOfEvents } = this.state;
+      this.setState({
+        events: locationEvents.slice(0, numberOfEvents)
+      });
     });
-  };
+  }
 
   getData = () => {
     const { locations, events } = this.state;
