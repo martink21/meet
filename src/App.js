@@ -111,7 +111,7 @@ class App extends Component {
         </ResponsiveContainer>   
         </div>
         <EventList
-          events={this.state.events} />
+          events={events} />
 
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => { getAccessToken() }} />
