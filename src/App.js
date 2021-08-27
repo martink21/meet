@@ -24,9 +24,9 @@ class App extends Component {
   }
 
   updateNumberOfEvents(eventNumber) {
-    //const { locations, numberOfEvents } = this.state;
+    const { currentLocation } = this.state;
     this.setState({ numberOfEvents: eventNumber });
-    this.updateEvents(this.state.currentLocation, eventNumber)
+    this.updateEvents(currentLocation, eventNumber)
   }
 
   async componentDidMount() {
