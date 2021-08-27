@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   updateNumberOfEvents(eventNumber) {
-    // const { locations, numberOfEvents } = this.state;
+    //const { locations, numberOfEvents } = this.state;
     this.setState({ numberOfEvents: eventNumber });
     this.updateEvents(this.state.currentLocation, eventNumber)
   }
@@ -86,8 +86,7 @@ class App extends Component {
         />
         <CitySearch
           locations={this.state.locations}
-          updateEvents={this.updateEvents}
-          numberOfEvents={this.state.numberOfEvents} />
+          updateEvents={this.updateEvents}/>
 
         <NumberOfEvents
           updateNumberOfEvents={(e) => this.updateNumberOfEvents(e)}
