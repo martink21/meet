@@ -9,7 +9,7 @@ class NumberOfEvents extends Component {
 
   handleInputChanged = (event) => {
     const number = event.target.value;
-     if (number <= 0 || number > 32) {
+     if (number < 0 || number > 32) {
       return this.setState({
         infoText: 'Please enter a number between 1 and 32',
         numberOfEvents: '0'  
