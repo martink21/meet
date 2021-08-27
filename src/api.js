@@ -29,7 +29,7 @@ import NProgress from 'nprogress';
   const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const { access_token } = await fetch(
-      `https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/token=${encodeCode}`
+      `https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`
     )
       .then((res) => {
         return res.json();
@@ -73,7 +73,7 @@ import NProgress from 'nprogress';
   
     if (token) {
       removeQuery();
-      const url = `https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;
+      const url = `https://lh3m6oobs8.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/${token}`;  
       const result = await axios.get(url);
       if (result.data) {
         let locations = extractLocations(result.data.events);
